@@ -8,8 +8,11 @@ rocketmq version: 4.0.0-incubating
 + batch-service: Spring Batch Job
 
 
-The Pub Service publish a message by (http://localhost:9909/pub-message)
-The Batch Service receive a message and run job
+The Pub Service publish a message by (http://localhost:9909/pub-message).
+After that, the Batch Service receive a message and run job
+
+[!images/publish-message.png]
+[!images/receive-message-and-run-job.png]
 
 ### Usage:
 
@@ -38,7 +41,7 @@ docker-compose up -d
 
 ### Testing Pub Sub Service
 
-#### Publish Mesage
+#### Publish Mesage and Running Batch Service via RocketMQ
 http://localhost:9909/pub-message
 
 #### RocketMQ Console
