@@ -1,0 +1,14 @@
+spring:
+  batch.job.enabled: false
+
+  h2:
+    console:
+    enabled: true
+    path: /h2-console
+    settings:
+      web-allow-others: true
+
+server.port: 9709
+
+# brokerIP1: rocketmq-broker-a-m
+rocketmq.config.brokerIP1: rocketmq-broker-a-m
