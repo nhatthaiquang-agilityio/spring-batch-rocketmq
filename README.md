@@ -1,11 +1,15 @@
 # Running Spring Batch Job via RocketMQ Sample
-rocketmq-docker-sample for 4.0.0-incubating version
+rocketmq version: 4.0.0-incubating
 
 + rocketmq-namesrv: RocketMQ Name Server
 + rocketmq-broker-a-m: RocketMQ Broker
 + pub-service: Publish & Subscribe Messages
 + rocketmq-console: UI for visualization Pub & Sub
 + batch-service: Spring Batch Job
+
+
+The Pub Service publish a message by (http://localhost:9909/pub-message)
+The Batch Service receive a message and run job
 
 ### Usage:
 
@@ -18,6 +22,12 @@ $ mvn clean package
 #### RocketMQ Console
 ```
 $ cd rocketmq-console
+$ mvn clean package
+```
+
+#### Batch Service
+```
+$ cd batch-service
 $ mvn clean package
 ```
 
@@ -34,6 +44,13 @@ http://localhost:9909/pub-message
 #### RocketMQ Console
 http://localhost:8080
 
+#### Checking Batch Job in Console
+
+#### Run Job via API
+http://localhost:9709/launchjob
+
 ####
 ### Reference
 [RockerMQ Docker Sample - Github](https://github.com/jingxizheng/rocketmq-docker-sample)
+
+[Spring Batch](https://examples.javacodegeeks.com/enterprise-java/spring/batch/spring-batch-job-parameters-example/)
