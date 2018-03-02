@@ -41,15 +41,8 @@ public class ConsumerMsg {
     @Resource
     private RMQConfigure rMQConfigure;
 
-    public ConsumerMsg() throws MQClientException, InterruptedException {
-        consumer = new DefaultMQPushConsumer(testTopic + "Group");
-        consumer.setNamesrvAddr(rMQConfigure.getNamesrvAddr());
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-        consumer.subscribe(testTopic, "*");
-    }
-
     private void runJob() {
-        // call running Batch Job
+        // Running Batch Job
         try {
             System.out.println("Running Batch Job");
             JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
@@ -61,7 +54,12 @@ public class ConsumerMsg {
 
     }
 
-    public void receiveMessages() throws MQClientException {
+    public void receiveMessages() throws MQClientException, InterruptedException {
+        consumer = new DefaultMQPushConsumer(testTopic + "Group");
+        consumer.setNamesrvAddr(rMQConfigure.getNamesrvAddr());
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.subscribe(testTopic, "*");
+
         /*
          *  Register callback to execute on arrival of messages fetched from brokers.
          */
