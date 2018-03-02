@@ -36,9 +36,12 @@ public class ConsumerMsg {
     @Autowired
     Job job;
 
+    @Resource
+    private RMQConfigure rMQConfigure;
+
     public ConsumerMsg() throws MQClientException, InterruptedException {
         consumer = new DefaultMQPushConsumer(testTopic + "Group");
-        consumer.setNamesrvAddr("rocketmq-namesrv:9876");
+        consumer.setNamesrvAddr(rMQConfigure.getNamesrvAddr());
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe(testTopic, "*");
     }
