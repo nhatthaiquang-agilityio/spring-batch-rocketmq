@@ -1,0 +1,72 @@
+version: '2.1'
+
+services:
+  rocketmq-base:
+    image: rocketmq-base-image:4.0.0-incubating
+    build: ./base
+
+  rocketmq-namesrv:
+    image: rocketmq-namesrv-image:4.0.0-incubating
+    build:
+      context: ./namesrv
+    ports:
+      - "9876:9876"
+    depends_on:
+      - rocketmq-base
+
+  rocketmq-broker-a-m:
+    image: rocketmq-broker-a-m-image:4.0.0-incubating
+    build:
+      context: ./broker
+    environment:
+      NAMESRV_ADDR: "rocketmq-namesrv:9876"
+    ports:
+      - "10911:10911"
+      - "10909:10909"
+    depends_on:
+      - rocketmq-base
+      - rocketmq-namesrv
+    links:
+      - rocketmq-namesrv
+
+  pub-service:
+    image: pub-service:latest
+    build:
+      context: ./pub-service
+    environment:
+      NAMESRV_ADDR: "rocketmq-namesrv:9876"
+    ports:
+      - "9909:9909"
+    depends_on:
+      - rocketmq-base
+      - rocketmq-namesrv
+    links:
+      - rocketmq-namesrv
+      - rocketmq-broker-a-m
+
+  rocketmq-console:
+    image: rocketmq-console:latest
+    build:
+      context: ./rocketmq-console
+    environment:
+      NAMESRV_ADDR: rocketmq-namesrv:9876
+    links:
+      - rocketmq-namesrv
+      - rocketmq-broker-a-m
+    ports:
+      - 8080:8080
+
+  batch-service:
+    image: batch-service:latest
+    build:
+      context: ./batch-service
+    environment:
+      NAMESRV_ADDR: rocketmq-namesrv:9876
+    depends_on:
+      - rocketmq-broker-a-m
+      - rocketmq-namesrv
+    links:
+      - rocketmq-namesrv
+      - rocketmq-broker-a-m
+    ports:
+      - 9709:9709
