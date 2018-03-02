@@ -12,6 +12,8 @@ The Pub Service publish a message by (http://localhost:9909/pub-message).
 After that, the Batch Service receive a message and run job
 
 ![Publish a message](images/publish-message.png)
+
+
 ![Receive a message and run Job](images/receive-message-and-run-job.png)
 
 ### Usage:
