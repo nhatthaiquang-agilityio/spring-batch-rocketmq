@@ -9,5 +9,3 @@ spring:
       web-allow-others: true
 
 server.port: 9709
-
-rocketmq.config.brokerIP1: rocketmq-broker-a-m
