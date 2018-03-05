@@ -4,6 +4,3 @@ spring:
 
 server:
   port: 9909
-
-# brokerIP1: rocketmq-broker-a-m
-rocketmq.config.brokerIP1: rocketmq-broker-a-m
