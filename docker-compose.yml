@@ -19,7 +19,7 @@ services:
     build:
       context: ./broker
     environment:
-      NAMESRV_ADDR: "rocketmq-namesrv:9876"
+      NAMESRV_ADDR: rocketmq-namesrv:9876
     ports:
       - "10911:10911"
       - "10909:10909"
@@ -34,7 +34,7 @@ services:
     build:
       context: ./pub-service
     environment:
-      NAMESRV_ADDR: "rocketmq-namesrv:9876"
+      NAMESRV_ADDR: rocketmq-namesrv:9876
     ports:
       - "9909:9909"
     depends_on:
