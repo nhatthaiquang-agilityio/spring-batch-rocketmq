@@ -33,23 +33,14 @@ public class PubController {
     @Resource
     private RMQConfigure rMQConfigure;
 
+    /*
+    *  Publish a Message and Run Job
+    */
 	@RequestMapping("/pub-message")
 	public String publishMessage() throws MQClientException, InterruptedException {
         ProducerMsg pub = new ProducerMsg();
         pub.sendMessages();
         return "Done Publish Message";
-    }
-
-    @RequestMapping(value = "/hi")
-    public String greet() {
-        return "Hi there";
-    }
-
-    @RequestMapping(value = "/get-messages")
-    public String getMessages() throws MQClientException, InterruptedException {
-        ConsumerMsg consumer = new ConsumerMsg();
-        consumer.receiveMessages();
-        return "Receive Message";
     }
 
     @RequestMapping(value = "/pubsub-messages")
@@ -68,6 +59,7 @@ public class PubController {
             }
         });
         consumer.start();
+
         final DefaultMQProducer producer = new DefaultMQProducer(testTopic + "Group");
         producer.setInstanceName(String.valueOf(System.currentTimeMillis()));
         producer.setNamesrvAddr(rMQConfigure.getNamesrvAddr());
