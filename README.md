@@ -5,11 +5,11 @@ rocketmq version: 4.0.0-incubating
 + rocketmq-broker-a-m: RocketMQ Broker
 + pub-service: Publish & Subscribe Messages
 + rocketmq-console: UI for visualization Pub & Sub
-+ batch-service: Spring Batch Job
++ batch-service: Spring Batch Job (Batch Job Consumer)
 
 
 The Pub Service publish a message by (http://localhost:9909/pub-message).
-After that, the Batch Service receive a message and run job
+After that, the Batch Service receives a message and runs job
 
 #### Publish a message
 ![Publish a message](images/publish-message.png)
@@ -39,12 +39,12 @@ $ mvn clean package
 
 #### docker-compose:
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 ### Testing Pub Sub Service
 
-#### Publish Mesage and Running Batch Service via RocketMQ
+#### Publish a mesage and Running Batch Service via RocketMQ
 http://localhost:9909/pub-message
 
 #### RocketMQ Console
