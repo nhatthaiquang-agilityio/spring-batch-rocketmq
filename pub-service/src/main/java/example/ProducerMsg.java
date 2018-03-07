@@ -2,6 +2,8 @@ package example;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Component;
+
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -11,6 +13,7 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
 /**
  * This class demonstrates how to send messages to brokers using provided {@link DefaultMQProducer}.
  */
+@Component
 public class ProducerMsg {
     private String testTopic = "RunJob";
 
@@ -20,7 +23,7 @@ public class ProducerMsg {
 
     public void sendMessages() throws MQClientException, InterruptedException {
         DefaultMQProducer producer = new DefaultMQProducer(testTopic + "Group");
-        producer.setNamesrvAddr("rocketmq-namesrv:9876");
+        producer.setNamesrvAddr(rMQConfigure.getNamesrvAddr());
         producer.setVipChannelEnabled(false);
         producer.start();
 
